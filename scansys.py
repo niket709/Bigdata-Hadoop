@@ -6,7 +6,7 @@ ip_list=[]
 # set your ipaddr according to your networkid
 ipaddr="192.168.10."
 # set range according to the ip range
-for  i  in   range(121)[-1:]  :
+for  i  in   range(121)[-21:]  :
 	check=commands.getstatusoutput('ping  -c 1 192.168.10.'+str(i))
 	if  check[0] ==  0  :
 		ip_list.append(ipaddr+str(i))
@@ -24,7 +24,7 @@ mem_check="cat /proc/meminfo | grep -i MemTotal:"
 
 # remote login in systems and extracting information about  CPU core and size of HDD
 for i   in  ip_list:
-	ignore_exit_value, cpu_core=commands.getstatusoutput('sshpass -p "redhat" ssh root@'+i+" "+cpu_check)
+	ignore_exit_value, cpu_core=commands.getstatusoutput('sshpass -p "redhat" ssh -o StrictHostKeyChecking=no root@'+i+" "+cpu_check)
 	cpu=cpu_core.strip()
 	
 	ignore1,memory_value=commands.getstatusoutput('sshpass -p "redhat" ssh root@'+i+" "+mem_check)
