@@ -14,13 +14,14 @@ for i in ip_list:
 		ip_listing.append(i)
 print ip_listing		
 
+# F_ram denotes free ram
 
 cpu_core_ip={}
-hdd_ip={}
+F_ram_ip={}
 cpu_check="lscpu   |  grep -i 'CPU(s):'   |   head  -1  |  cut -d:   -f2"
 mem_check="cat /proc/meminfo | grep -i MemFree:"
 
-# remote login in systems and extracting information about  CPU core and FREE memory size of HDD
+# remote login in systems and extracting information about  CPU core and FREE memory size of RAM
 for i   in  ip_list:
 	ignore_exit_value, cpu_core=commands.getstatusoutput('sshpass -p "q" ssh -o StrictHostKeyChecking=no root@'+i+" "+cpu_check)
 	cpu=cpu_core.strip()
@@ -38,16 +39,16 @@ for i   in  ip_list:
 	y1=ast.literal_eval(x1)
 
 
-	hdd_ip.update(y1)
+	F_ram_ip.update(y1)
 
 
-	sort_hdd_ip=sorted(hdd_ip,key=hdd_ip.get,reverse=True)
+	sort_F_ram_ip=sorted(F_ram_ip,key=F_ram_ip.get,reverse=True)
 
 ############################################################### NAMENODE ############################################################################
 
-namenode=sort_hdd_ip[0]
+namenode=sort_F_ram_ip[0]
 
-if namenode in sort_hdd_ip:
+if namenode in sort_F_ram_ip:
 	commands.getoutput("sshpass -p 'q' scp /root/Desktop/hdfs_conf_file root@"+namenode+":/etc/hadoop/")
 
 	commands.getoutput("sshpass -p 'q' scp /root/Desktop/core_conf_file root@"+namenode+":/etc/hadoop/")
