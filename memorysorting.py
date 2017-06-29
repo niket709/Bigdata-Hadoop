@@ -16,7 +16,7 @@ print ip_listing
 
 
 
-cpu_ip={}
+hdd_ip={}
 cpu_check="lscpu   |  grep -i 'CPU(s):'   |   head  -1  |  cut -d:   -f2"
 mem_check="cat /proc/meminfo | grep -i MemFree:"
 
@@ -38,12 +38,17 @@ for i   in  ip_list:
 	y=ast.literal_eval(x)
 
 
-	cpu_ip.update(y)
+	hdd_ip.update(y)
 
 
-	sort_ip=sorted(cpu_ip,key=cpu_ip.get,reverse=True)
+	sort_hdd_ip=sorted(hdd_ip,key=hdd_ip.get,reverse=True)
 
 
-print cpu_ip
+print hdd_ip
 
-print sort_ip
+print "############"
+
+print "@@@@@@@@@@@@"
+print sort_hdd_ip
+
+
