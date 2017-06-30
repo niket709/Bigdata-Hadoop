@@ -1,0 +1,4 @@
+<property>
+<name>mapred.job.tracker</name>
+<value>jobip:90001</value>
+</property>
