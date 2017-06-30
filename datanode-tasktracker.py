@@ -167,7 +167,7 @@ for dn_ip in datanodes:
 	
 	commands.getoutput(t3)
 	
-	commands.getoutput("sshpass -p 'q' ssh -o StrictHostKeyChecking=no root@"+dn_ip+" "+'\'sed -i \"s/jobip/'+dn_ip+"/"+"\" /etc/hadoop/mapred-site.xml\'")
+	commands.getoutput("sshpass -p 'q' ssh -o StrictHostKeyChecking=no root@"+dn_ip+" "+'\'sed -i \"s/jobip/'+jobtracker+"/"+"\" /etc/hadoop/mapred-site.xml\'")
 
 	commands.getoutput("sshpass -p 'q' ssh -o StrictHostKeyChecking=no root@"+dn_ip+" "+'\'sed -i \"s/ipaddr/'+namenode+"/"+"\" /etc/hadoop/core-site.xml\'")
 	
